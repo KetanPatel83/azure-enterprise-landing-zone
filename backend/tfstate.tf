@@ -8,7 +8,7 @@ resource "random_id" "uniqueString" {
 resource "azurerm_resource_group" "resource_group" {
   name     = "${var.resource_group_name}"
   location = "${var.location}"
-  tags = "${var.tags}"
+  tags     = "${var.tags}"
 }
 resource "azurerm_storage_account" "tf_backend" {
   name                     = "tfbackend${random_id.uniqueString.hex}"
@@ -16,7 +16,7 @@ resource "azurerm_storage_account" "tf_backend" {
   location                 = "${var.location}"
   account_tier             = "standard"
   account_replication_type = "LRS"
-  tags = "${var.tags}"
+  tags                     = "${var.tags}"
   lifecycle {
     prevent_destroy = false
   }
