@@ -11,3 +11,7 @@ variable "tags" {
   description = "tags for the stack"
 }
 
+variable "enable_firewall" {
+  description = "creates firewall if set to true"
+  type        = bool
+}

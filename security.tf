@@ -23,24 +23,3 @@ resource "azurerm_subnet_network_security_group_association" "web" {
   subnet_id                 = "${azurerm_subnet.web-sub.id}"
   network_security_group_id = "${azurerm_network_security_group.web.id}"
 }
-
-resource "azurerm_public_ip" "firewall_ip" {
-  name                = "fwpip"
-  location            = "${azurerm_resource_group.resource_group.location}"
-  resource_group_name = "${azurerm_resource_group.resource_group.name}"
-  allocation_method   = "Static"
-  sku                 = "Standard"
-  tags                = "${var.tags}"
-}
-resource "azurerm_firewall" "firewall" {
-  name                = "webfirewall"
-  location            = "${azurerm_resource_group.resource_group.location}"
-  resource_group_name = "${azurerm_resource_group.resource_group.name}"
-
-  ip_configuration {
-    name                 = "configuration"
-    subnet_id            = "${azurerm_subnet.firewall_subnet.id}"
-    public_ip_address_id = "${azurerm_public_ip.firewall_ip.id}"
-  }
-  tags = "${var.tags}"
-}
